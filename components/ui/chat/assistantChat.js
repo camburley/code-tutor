@@ -18,9 +18,10 @@ export function AssistantChatCard({ text = "Hi, how can I help you?"}){
                 <SyntaxHighlighter
                 style={{ ...oneDark, border: '1px solid transparent', marginTop: 0 }}
                 language={language.trim() || "javascript" }
-                children={code.trim()}
                 key={index}
-                />
+                >
+                {code.trim()}
+                </SyntaxHighlighter>
 
                 </>
             );
