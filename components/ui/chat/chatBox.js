@@ -31,7 +31,7 @@ export function ChatBox() {
 
             try {
                 let currentStreamedText = ""
-                await fetchEventSource("https://calm-everglades-42684-35e3f9b35e00.herokuapp.com/api/v1/assistant/simpleTrainedChat", {
+                await fetchEventSource("https://glacial-mesa-59423-9de31975a7ab.herokuapp.com/api/v1/assistant/simpleTrainedChat", {
                     method: "POST",
                     body: JSON.stringify({
                         userMessage: inputText.trim(),
