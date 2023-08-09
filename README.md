@@ -1,34 +1,147 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NEXT.JS + LangChain Conversational Chat Course
 
-## Getting Started
+This course teaches you how to build conversational AI applications using [Langchain](https: //langchain.org/ ) and [OpenAI's API](https: //openai.com/api/ ) with [Next.js](https: //nextjs.org/ ).
 
-First, run the development server:
+
+## Installation
+
+1. Clone this repo via git to use the components.
+
+```bash
+git clone https://github.com/camburley/code-tutor.git
+```
+
+2. Navigate to the cloned folder.
+
+```bash
+cd code-tutor
+```
+
+3. Use your preferred package manager to install packages.
+
+```bash
+npm i
+```
+
+## Run Development
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Fix TailWind Issues
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```bash
+npx prettier --write .
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+## chatBox.js 
+Ready to go out the box. I **recommended** using and changing the UI elements in this component as this has everything working together.
+```typescript
+import { ChatBox } from "@/components/ui/chat/chatBox"
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+export default function Home() {
+  return (
+    <section>
+      <div className="flex items-center justify-center">
+        <ChatBox />
+      </div>
+    </section>
+  )
+}
+```
+## assistantChat.js
+Card-like component that takes a text prop and returns the card with the text.
+```typescript
+import { AssistantChatCard} from "@/components/ui/chat/assistantChat"
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+export default function Home() {
+  return (
+    <section>
+      <div className="flex items-center justify-center">
+        <AssistantChatCard text="hi" />
+      </div>
+    </section>
+  )
+}
+```
+## userChat.js
+Card-like component that takes a text prop and returns the card with the text.
+```typescript
+import { UserChatCard} from "@/components/ui/chat/userChat"
+
+export default function Home() {
+  return (
+    <section>
+      <div className="flex items-center justify-center">
+        <UserChatCard text="hi" />
+      </div>
+    </section>
+  )
+}
+```
+
+## messageInput.js
+Input compenent, that takes in user input for the chat, can be disabled or loading with props to control different actions.
+```typescript
+import { MessageInput } from "./MessageInput"
+
+export default function Home() {
+  return (
+    <section>
+      <div className="flex items-center justify-center">
+        <MessageInput
+          isDisabled={isDisabled}
+          isLoading={isLoading}
+          inputText={inputText}
+          handleKeyDown={handleKeyDown}
+          handleSendMessage={handleSendMessage}
+          setInputText={setInputText}
+        />
+      </div>
+    </section>
+  )
+}
+```
+## ChatWindow.js
+Scroll area conponent, used to house the chat elements and enable chat scrolling.
+```typescript
+import { ChatWindow } from "./ChatWindow"
+     
+
+export default function Home() {
+  return (
+    <section>
+      <div className="flex items-center justify-center">
+        <ChatWindow messages={messages} scrollAreaRef={scrollAreaRef} />
+      </div>
+    </section>
+  )
+}
+```
+## Course Outline
+This course covers the following topics:
+
+Introduciton to Conversational AI with JavaScript
+
+How to setup Open AI API
+Build a chatbot that understands your code
+Learn to use AI tools from Langchain
+Deploying a Langchain app for FREE
+Each topic has code examples and exercises to help you learn!
 
 ## Deploy on Vercel
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https: //vercel.com/new) from the creators of Next.js.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Check out our [Next.js deployment documentation](https: //nextjs.org/ docs/deployment) for more details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Feedback and Contributions
+Your feedback and contributions are welcome! Please feel free to open an issue or submit a pull request.
+
+Since this projects goal is to help each other learn langchain and next.js, feel free to make a PR for any changes. Not all PR's will be approved.
+
+# code-tutor

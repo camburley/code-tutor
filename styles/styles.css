@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+
+/* Styles for webkit browsers like Chrome, Safari */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.1); /* You can change the color and opacity here */
+    border-radius: 20px;
+}
+
+/* Styles for Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.1) transparent;
+}
+
+.custom-textarea:focus {
+    outline: none !important;
+    border-color: transparent !important;
+  }
+
+  .sliderClass .slider {
+    background-color: grey !important;
+    opacity: 0.5 !important;
+  }
