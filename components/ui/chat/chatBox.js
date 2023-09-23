@@ -9,9 +9,15 @@ export function ChatBox() {
     const [inputText, setInputText] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleSendMessage = useCallback( async () => {
+    const eventSourceRef = useRef(null);
 
-        if(inputText.trim() !== "" && !isLoading ){
+    const handleSendMessage = async () => {
+
+        if (eventSourceRef.current) {
+            eventSourceRef.current.close();  // Close existing EventSource
+          }
+
+        if(inputText.trim() !== "" && inputText !== "" && inputText !== undefined && !isLoading ){
             setIsLoading(true);
             setInputText("")
 
@@ -31,7 +37,7 @@ export function ChatBox() {
 
             try {
                 let currentStreamedText = ""
-                await fetchEventSource("https://glacial-mesa-59423-9de31975a7ab.herokuapp.com/api/v1/assistant/simpleTrainedChat", {
+                eventSourceRef.current = await fetchEventSource("https://glacial-mesa-59423-9de31975a7ab.herokuapp.com/api/v1/assistant/simpleTrainedChat", {
                     method: "POST",
                     body: JSON.stringify({
                         userMessage: inputText.trim(),
@@ -42,8 +48,16 @@ export function ChatBox() {
                     headers: { "Content-Type": "application/json" },
                     onmessage(ev) {
                         if (ev.data){
-                            currentStreamedText += JSON.parse(ev.data) 
-                        }
+                            if(ev.data === "🤖" || ev.data === '"🤖"' ){
+                                console.log("Boxing🥊🥊🥊🥊🥊");
+                                eventSourceRef.current.close();
+                            } else {
+                                console.log("Boxing🏴‍☠️")
+                            }
+                            currentStreamedText += JSON.parse(ev.data) }
+                         else {
+                            currentStreamedText += "\n"
+                          }
 
                         setMessages((prevMessages) => {
                             const newMessages = [...prevMessages]
@@ -83,9 +97,12 @@ export function ChatBox() {
             } catch (error) {
                 console.error("Error: ", error);
                 setIsLoading(false);
-            }
+            } finally {
+                setIsLoading(false);
+          
+              }
         }
-    }, [messages, inputText, isLoading]);
+    };
 
     const handleKeyDown = (event) => {
         if(event.key === "Enter" && !event.shiftKey) {
