@@ -5,7 +5,7 @@ import { ChatWindow } from "./ChatWindow"
 import MessageInput from "./MessageInput";
 
 export function ChatBox() {
-    const [messages, setMessages] = useState([{ sender: "assistant", text: "Hey 👋 -- What do you want to know about? " }, ]);
+    const [messages, setMessages] = useState([{ sender: "assistant", text: "Hey 👋 -- What can I help you understand? " }, ]);
     const [inputText, setInputText] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
@@ -66,6 +66,7 @@ export function ChatBox() {
                             newMessages[lastMessageIndex] = {
                                 ...newMessages[lastMessageIndex], 
                                 text: currentStreamedText,
+                                id: lastMessageIndex
                             }
 
                             return newMessages
@@ -79,18 +80,6 @@ export function ChatBox() {
                     },
 
                     async onclose() {
-                        setMessages((prevMessages) => {
-                            const newMessages = [...prevMessages]
-                            const lastMessageIndex = newMessages.length - 1
-
-                            newMessages[lastMessageIndex] = {
-                                ...newMessages[lastMessageIndex], 
-                                text: currentStreamedText,
-                            }
-
-                            return newMessages
-                        })
-                        setIsLoading(false);
                         console.log("connection closed");
                     },
                 })
